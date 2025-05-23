@@ -3,7 +3,6 @@ import { weatherPlugin } from "./plugins/weatherPlugin";
 import { calcPlugin } from "./plugins/calcPlugin";
 import { definePlugin } from "./plugins/definePlugin";
 
-// Generic Plugin interface
 export interface Plugin<T> {
   name: string;
   match: (input: string) => boolean;
@@ -11,17 +10,16 @@ export interface Plugin<T> {
   render: (data: T) => React.ReactElement;
 }
 
-// Use union type for plugin data
+
 type PluginData = { result: string };
 
-// Explicitly type plugin list
 export const plugins: Plugin<PluginData>[] = [
   weatherPlugin,
   calcPlugin,
   definePlugin,
 ];
 
-// Plugin manager
+
 export const pluginManager = {
   match: (input: string) => plugins.find((p) => p.match(input)),
   run: async (input: string) => {
